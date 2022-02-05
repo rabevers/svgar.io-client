@@ -6,9 +6,9 @@
      */
     import { onMount } from 'svelte';
     import { player } from '../stores/game.js';
-
     import Map from './Map.svelte';
     import Player from './Player.svelte';
+    import Food from './Food.svelte';
 
     export let width: number = 800;     // Create a default width for the map
     export let height: number = 600;    // Create a default height for the map
@@ -94,6 +94,13 @@
 >
     <Map>
         <Player playerX={$player.x} playerY={$player.y} />
+        <Food foodX={100} foodY={150} />
+        <Food foodX={150} foodY={150} />
+        <Food foodX={200} foodY={150} />
+        <Food foodX={250} foodY={150} />
+        <Food foodX={300} foodY={150} />
+        <Food foodX={350} foodY={150} />
+        <Food foodX={400} foodY={150} />
     </Map>
 </svg>
 
