@@ -5,10 +5,11 @@
      * It will function as the viewport for the map.
      */
     import { onMount } from 'svelte';
-    import { player } from '../stores/game.js';
+    import { foodColors, player, world } from '../stores/game.js';
     import Map from './Map.svelte';
     import Player from './Player.svelte';
     import Food from './Food.svelte';
+    import { generateFood } from '../lib.js';
 
     export let width: number = 800;     // Create a default width for the map
     export let height: number = 600;    // Create a default height for the map
@@ -36,6 +37,10 @@
     };
 
     onMount(() => {
+        // Generate food for the map
+
+        $world.food = generateFood(50, 800, 600, foodColors);
+
         /**
          * Create and start a game loop
          * https://developer.mozilla.org/en-US/docs/Games/Anatomy
@@ -94,13 +99,9 @@
 >
     <Map>
         <Player playerX={$player.x} playerY={$player.y} />
-        <Food foodX={100} foodY={150} />
-        <Food foodX={150} foodY={150} />
-        <Food foodX={200} foodY={150} />
-        <Food foodX={250} foodY={150} />
-        <Food foodX={300} foodY={150} />
-        <Food foodX={350} foodY={150} />
-        <Food foodX={400} foodY={150} />
+        {#each $world.food as food}
+        <Food foodX={food.x} foodY={food.y} color={food.color} />
+        {/each}
     </Map>
 </svg>
 
